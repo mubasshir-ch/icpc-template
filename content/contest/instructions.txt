@@ -1,20 +1,22 @@
 Compilation:
-1. mkdir WF
+1. mkdir contest 
 2. vi .bashrc
-3. Add the line: export PATH="$PATH:$HOME/WF"
-4. cd WF && vi cf.sh -> Write the compilation commands
+3. Add the line: export PATH="$PATH:$HOME/contest"
+4. cd contest && vi cf.sh -> Write the compilation commands
 5. mv cf.sh cf && chmod +x cf
 6. Restart terminal
 
-Kate:
-1. Theme: Settings->Configure Kate->Color Themes
-2. Vim mode: Settings->Configure Kate->Editing->Default input mode.
-   Then Vi Input mode->Insert mode->jk = <esc>
-3. Word wrap: Settings->Configure Kate->Appearance->Turn off dynamic w.w.
-4. Terminal: Make sure View->Tool Views->Show sidebars is on. Go to
-   Settings->Configure Kate->Terminal and turn off Hide Konsole.
-5. Hotkey for terminal: Change Focus Terminal Panel to F4. Click "Reassign"
-   when it says it collides with Show Terminal Panel.
+Sublime:
+1. Enable Vim mode: `ctrl+shift+p` -> 
+"ignored_packages": [],
+"vintage_start_in_command_mode": true,
+"vintage_use_clipboard": true,
+"relative_line_numbers": true
+
+2. Create build system: 
+    -`ctrl+shift+p` view package files: c++ single file
+    - Tools->New Build System copy the Sublime build and do the edits
+    - Save it as g++.sublime-build
 
 Fast Compile, Template, Debug:
 1. cd WF && mkdir bits

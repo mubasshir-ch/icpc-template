@@ -1,34 +1,59 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-template <typename T> constexpr
-void __print (const T &x);
+ostream& operator<<(ostream& o,const string& s);
 
-template<typename T, typename V>
-void __print(const pair<T, V> &x) {
-  cerr << "{"; __print(x.first);
-  cerr << ", "; __print(x.second); cerr << "}";
-}
-template <typename T> constexpr
-void __print (const T &x) {
-  if constexpr (is_arithmetic_v<T> ||
-    is_same_v<T,const char*> || is_same_v<T,bool>
-    || is_same_v<T, string>) cerr << x;
-  else {
-    int f = 0; cerr << '{';
-    for (auto &i: x)
-      cerr << (f++ ? ", " : ""), __print(i);
-    cerr << "}";
-  }
-}
-void _print() { cerr << "]\n"; }
-template <typename T, typename... V>
-void _print(T t, V... v) {
-  __print(t);
-  if (sizeof...(v)) cerr << ", ";
-  _print(v...);
+template<typename F, typename S>
+ostream& operator<<(ostream& o, const pair<F,S>& p);
+
+template<typename... T, template<class...> class C>
+ostream& operator<<(ostream& o, const C<T...>& v);
+
+ostream& operator<<(ostream& o, const string& s){
+    for(auto c:s) o<<c;
+    return o;
 }
 
-#ifdef DeBuG
-#define dbg(x...) cerr << "\t\e[93m"<<__func__<<":"<<__LINE__<<" [" << #x << "] = ["; _print(x); cerr << "\e[0m";
-#endif
+template<typename F, typename S>
+ostream& operator<<(ostream& o, const pair<F,S>& p){
+    o << "(" << p.first <<  "," << p.second  << ")";
+    return o;
+}
+
+template<typename... T, template<class...> class C>
+ostream& operator<<(ostream& o, const C<T...>& v){
+    o << "[";
+    int tot=0;
+    for(auto x : v){ 
+        o << x;
+        if(tot < (int)v.size() -1) o << ",";
+        tot++;
+    }
+    o << "]";
+    return o;
+}
+
+vector<string> vec_splitter(string s) {
+    s += ',';
+    vector<string> res;
+    while(!s.empty()) {
+        res.push_back(s.substr(0, s.find(',')));
+        s = s.substr(s.find(',') + 1);
+    }
+    return res;
+}
+void debug_out(
+vector<string> __attribute__ ((unused)) args,
+__attribute__ ((unused)) int idx, 
+__attribute__ ((unused)) int LINE_NUM) { cerr << endl; } 
+template <typename Head, typename... Tail>
+void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
+    if(idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
+    stringstream ss; ss << H;
+    cerr << args[idx] << " = " << ss.str();
+    debug_out(args, idx + 1, LINE_NUM, T...);
+}
+
+#define debug(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
+
+
